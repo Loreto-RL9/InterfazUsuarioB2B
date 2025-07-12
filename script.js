@@ -14,7 +14,11 @@ function guardarNombre() {
 function enviarDatos() {
   const nombre = localStorage.getItem("comprador");
   const disponibilidad = document.getElementById("disponibilidad").value;
-  const requerimientos = Array.from(document.getElementById("requerimientos").selectedOptions).map(opt => opt.value).join(", ");
+
+  // checkboxes marcados
+  const requerimientos = Array.from(
+    document.querySelectorAll('#requerimientos input[type="checkbox"]:checked')
+  ).map(opt => opt.value).join(", ");
 
   if (!nombre) {
     alert("Error: comprador no identificado.");
@@ -24,7 +28,7 @@ function enviarDatos() {
   fetch(sheetURL, {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"  // ← Esto es importante
+      "Content-Type": "application/x-www-form-urlencoded"
     },
     body: new URLSearchParams({
       nombre: nombre,
@@ -34,7 +38,9 @@ function enviarDatos() {
   })
   .then(res => res.text())
   .then(msg => {
-    document.getElementById("mensaje").textContent = msg;
+    document.getElementById("mensaje").textContent = msg.includes("success")
+      ? "Actualización exitosa."
+      : "No se encontró el comprador.";
   })
   .catch(err => {
     document.getElementById("mensaje").textContent = "Error al actualizar.";
