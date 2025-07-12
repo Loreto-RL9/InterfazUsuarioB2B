@@ -1,4 +1,4 @@
-const sheetURL = "https://script.google.com/macros/s/AKfycbznqDQJpWBSiQr2_tgffZyK8F8ZVXqvKufc3ZJCBeqAes8Tztp5XWJRGLqypTW9MzzpnQ/exec";
+const sheetURL = "https://script.google.com/macros/s/AKfycby1ari_smtWC9u1_eenxu3Swx3o81RPYYpC99V4aVxaJgjAdrg_gYoMeMPfh3_d_JOnrA/exec";
 
 function guardarNombre() {
   const nombre = document.getElementById("nombreComprador").value.trim();
