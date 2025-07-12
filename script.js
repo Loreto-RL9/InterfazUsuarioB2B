@@ -23,10 +23,13 @@ function enviarDatos() {
 
   fetch(sheetURL, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"  // ← Esto es importante
+    },
     body: new URLSearchParams({
-      "Comprador": nombre,
-      "Disponibilidad": disponibilidad,
-      "Requerimientos": requerimientos
+      nombre: nombre,
+      disponibilidad: disponibilidad,
+      requerimientos: requerimientos
     })
   })
   .then(res => res.text())
