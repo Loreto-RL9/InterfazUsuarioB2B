@@ -2,20 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Actualizar Disponibilidad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actualizar Disponibilidad B2B</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="pantallaInicial">
     <h2>Bienvenido</h2>
     <p>Escribe tu nombre exactamente como aparece en la base de datos:</p>
-    <input type="text" id="nombreComprador" placeholder="Tu nombre" />
+    <input type="text" id="nombreComprador" placeholder="Ej. DANA" />
     <button onclick="guardarNombre()">Entrar</button>
   </div>
 
-  <div id="formulario" style="display:none;">
+  <div id="formulario" style="display: none;">
     <h2>Actualizar tu disponibilidad</h2>
+
     <label for="disponibilidad">Disponibilidad:</label>
     <select id="disponibilidad">
       <option value="Disponible">Disponible</option>
@@ -24,16 +25,14 @@
     </select>
 
     <label for="requerimientos">Requerimientos:</label>
-    <select id="requerimientos" multiple>
-      <option value="Logística">Logística</option>
-      <option value="Compras">Compras</option>
-      <option value="Calidad">Calidad</option>
-      <option value="Producción">Producción</option>
-      <option value="TI">TI</option>
-      <option value="Finanzas">Finanzas</option>
-      <option value="RRHH">RRHH</option>
-      <option value="Otros">Otros</option>
-    </select>
+    <div class="checkbox-group" id="requerimientos">
+      <label><input type="checkbox" value="Inyección de plástico" /> Inyección de plástico</label>
+      <label><input type="checkbox" value="Barreneado" /> Barreneado</label>
+      <label><input type="checkbox" value="Empaque" /> Empaque</label>
+      <label><input type="checkbox" value="Electrónica" /> Electrónica</label>
+      <label><input type="checkbox" value="Logística" /> Logística</label>
+      <label><input type="checkbox" value="Equipo de protección" /> Equipo de protección</label>
+    </div>
 
     <button onclick="enviarDatos()">Actualizar</button>
     <p id="mensaje"></p>
