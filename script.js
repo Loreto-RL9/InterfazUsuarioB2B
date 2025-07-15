@@ -1,57 +1,56 @@
-const sheetURL = "https://script.google.com/macros/s/AKfycby1ari_smtWC9u1_eenxu3Swx3o81RPYYpC99V4aVxaJgjAdrg_gYoMeMPfh3_d_JOnrA/exec";
+let nombre = localStorage.getItem("comprador");
+
+if (!nombre) {
+  document.getElementById("modalNombre").style.display = "flex";
+} else {
+  document.getElementById("formularioCard").style.display = "block";
+}
 
 function guardarNombre() {
-  const nombre = document.getElementById("nombreComprador").value.trim();
-  if (nombre) {
-    localStorage.setItem("comprador", nombre);
-    document.getElementById("pantallaInicial").style.display = "none";
-    document.getElementById("formulario").style.display = "block";
-  } else {
-    alert("Por favor, escribe tu nombre.");
+  const input = document.getElementById("inputNombre").value.trim();
+  if (input) {
+    localStorage.setItem("comprador", input);
+    nombre = input;
+    document.getElementById("modalNombre").style.display = "none";
+    document.getElementById("formularioCard").style.display = "block";
   }
 }
 
-function enviarDatos() {
-  const nombre = localStorage.getItem("comprador");
+function enviar() {
   const disponibilidad = document.getElementById("disponibilidad").value;
-
-  // checkboxes marcados
   const requerimientos = Array.from(
     document.querySelectorAll('#requerimientos input[type="checkbox"]:checked')
-  ).map(opt => opt.value).join(", ");
+  ).map(opt => opt.value);
 
-  if (!nombre) {
-    alert("Error: comprador no identificado.");
-    return;
-  }
-
-  fetch(sheetURL, {
-    method: "POST",
+  fetch('https://qqegzhoxhzsgcqiulqul.supabase.co/rest/v1/Estado', {
+    method: 'PATCH',
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      'Content-Type': 'application/json',
+      'apikey': 'tu_anon_key_aqui',
+      'Authorization': 'Bearer tu_anon_key_aqui',
+      'Prefer': 'return=minimal'
     },
-    body: new URLSearchParams({
-      nombre: nombre,
-      disponibilidad: disponibilidad,
-      requerimientos: requerimientos
-    })
+    body: JSON.stringify([{
+      Compradores: nombre,
+      Disponibilidad: disponibilidad,
+      Requerimientos: requerimientos
+    }])
   })
-  .then(res => res.text())
-  .then(msg => {
-    document.getElementById("mensaje").textContent = msg.includes("success")
-      ? "Actualización exitosa."
-      : "No se encontró el comprador.";
+  .then(res => {
+    const msg = document.getElementById("mensaje");
+    if (res.ok) {
+      msg.textContent = "Actualizado correctamente";
+      msg.style.color = "green";
+    } else {
+      msg.textContent = "Error al actualizar";
+      msg.style.color = "red";
+    }
+    setTimeout(() => msg.textContent = "", 5000);
   })
-  .catch(err => {
-    document.getElementById("mensaje").textContent = "Error al actualizar.";
-    console.error(err);
+  .catch(() => {
+    const msg = document.getElementById("mensaje");
+    msg.textContent = "Error al conectar";
+    msg.style.color = "red";
+    setTimeout(() => msg.textContent = "", 5000);
   });
 }
-
-window.onload = () => {
-  const comprador = localStorage.getItem("comprador");
-  if (comprador) {
-    document.getElementById("pantallaInicial").style.display = "none";
-    document.getElementById("formulario").style.display = "block";
-  }
-};
