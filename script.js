@@ -38,8 +38,7 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
         Authorization: `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
         Prefer: "return=representation",
-        "x-client-info": "valion-frontend",
-        comprador: nombreGlobal  // 👈 ¡Este era el que faltaba!
+        comprador: nombreGlobal  // 👈 ¡Este es esencial para la política RLS!
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
