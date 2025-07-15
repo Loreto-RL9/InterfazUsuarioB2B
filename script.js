@@ -35,7 +35,7 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
   console.log("Requerimientos:", requerimientos);
 
   try {
-    const res = await fetch(`${API_URL}/rest/v1/Estado`, {
+    const res = await fetch(`${API_URL}/rest/v1/Estado?Compradores=eq.${encodeURIComponent(nombreGlobal)}`, {
       method: "PATCH",
       headers: {
         apikey: API_KEY,
@@ -43,11 +43,11 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
         "Content-Type": "application/json",
         Prefer: "return=representation",
         "x-client-info": "valion-frontend",
-        comprador: nombreGlobal // importante para política RLS
+        comprador: nombreGlobal
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
-        Requerimientos: requerimientos // Enviar como arreglo, no como string
+        Requerimientos: requerimientos
       })
     });
 
