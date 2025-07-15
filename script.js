@@ -1,5 +1,5 @@
 const API_URL = "https://qqegzhoxhzsgcqiulqul.supabase.co";
-const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxZWd6aG94aHpzZ2NxaXVscXVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI1MzA0ODUsImV4cCI6MjA2ODEwNjQ4NX0.iAFhr3QoYJDkP1_iXGSsDZAd_f00RxuFK0HCdvo7ryE"; // ocultar en producción
+const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxZWd6aG94aHpzZ2NxaXVscXVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI1MzA0ODUsImV4cCI6MjA2ODEwNjQ4NX0.iAFhr3QoYJDkP1_iXGSsDZAd_f00RxuFK0HCdvo7ryE"; // ⚠️ ocultar en producción
 
 let nombreGlobal = "";
 
@@ -13,6 +13,7 @@ function confirmarNombre() {
   }
 
   nombreGlobal = nombre;
+
   document.getElementById("nombreMostrado").innerText = nombre;
   document.getElementById("moduloIdentidad").classList.add("oculto");
   document.getElementById("formularioModulo").classList.remove("oculto");
@@ -29,6 +30,10 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
     return;
   }
 
+  console.log("Nombre:", nombreGlobal);
+  console.log("Disponibilidad:", disponibilidad);
+  console.log("Requerimientos:", requerimientos);
+
   try {
     const res = await fetch(`${API_URL}/rest/v1/Estado`, {
       method: "PATCH",
@@ -38,11 +43,11 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
         "Content-Type": "application/json",
         Prefer: "return=representation",
         "x-client-info": "valion-frontend",
-        comprador: nombreGlobal  // Este header debe coincidir con el valor exacto en la columna Compradores
+        comprador: nombreGlobal // importante para política RLS
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
-        Requerimientos: requerimientos.join(", ")  // O requerimientos directamente si el campo es tipo array
+        Requerimientos: requerimientos // Enviar como arreglo, no como string
       })
     });
 
@@ -52,6 +57,8 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
       mensaje.innerText = "Actualizado correctamente.";
       mensaje.style.color = "green";
     } else {
+      const errorText = await res.text();
+      console.error("Error al actualizar:", errorText);
       mensaje.innerText = "Error al actualizar. Verifica el nombre.";
       mensaje.style.color = "red";
     }
