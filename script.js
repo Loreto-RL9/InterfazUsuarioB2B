@@ -39,25 +39,26 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
         apikey: API_KEY,
         Authorization: `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
-        Prefer: "return=representation",
-        "x-client-info": "valion-frontend",
-        comprador: nombreGlobal
+        Prefer: "return=representation"
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
-        Requerimientos: requerimientos.join(", ")
+        Requerimientos: requerimientos // usa array directamente si el campo es tipo array
       })
     });
 
     const mensaje = document.getElementById("mensajeConfirmacion");
+    const data = await res.json();
+    console.log("Respuesta Supabase:", data);
 
-    if (res.ok) {
-      mensaje.innerText = "Actualizado correctamente.";
+    if (res.ok && data.length > 0) {
+      mensaje.innerText = "✅ Actualizado correctamente.";
       mensaje.style.color = "green";
+    } else if (res.ok && data.length === 0) {
+      mensaje.innerText = "⚠️ Nombre no encontrado en la base.";
+      mensaje.style.color = "orange";
     } else {
-      const errorData = await res.json();
-      console.error("Error al actualizar:", errorData);
-      mensaje.innerText = "Error al actualizar. Verifica el nombre.";
+      mensaje.innerText = "❌ Error al actualizar. Revisa consola.";
       mensaje.style.color = "red";
     }
 
@@ -65,7 +66,7 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
       mensaje.innerText = "";
     }, 5000);
   } catch (error) {
-    console.error("Error de red:", error);
+    console.error("❌ Error de red:", error);
     document.getElementById("mensajeConfirmacion").innerText = "Error de red.";
   }
 });
