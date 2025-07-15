@@ -3,41 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Actualizar Disponibilidad B2B</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Actualizar disponibilidad</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="pantallaInicial">
-    <h2>Bienvenido</h2>
-    <p>Escribe tu nombre exactamente como aparece en la base de datos:</p>
-    <input type="text" id="nombreComprador" placeholder="Ej. DANA" />
-    <button onclick="guardarNombre()">Entrar</button>
+  <div class="modal" id="modalNombre">
+    <div class="modal-content">
+      <h3>Ingresa tu nombre personalizado</h3>
+      <input type="text" id="inputNombre" placeholder="Ejemplo: BRP-1.">
+      <button onclick="guardarNombre()">Continuar</button>
+    </div>
   </div>
 
-  <div id="formulario" style="display: none;">
+  <div class="card" style="display:none;" id="formularioCard">
     <h2>Actualizar tu disponibilidad</h2>
 
     <label for="disponibilidad">Disponibilidad:</label>
     <select id="disponibilidad">
       <option value="Disponible">Disponible</option>
       <option value="Ocupado">Ocupado</option>
-      <option value="Break">Break</option>
+      <option value="Receso">Receso</option>
     </select>
 
-    <label for="requerimientos">Requerimientos:</label>
-    <div class="checkbox-group" id="requerimientos">
-      <label><input type="checkbox" value="Inyección de plástico" /> Inyección de plástico</label>
-      <label><input type="checkbox" value="Barreneado" /> Barreneado</label>
-      <label><input type="checkbox" value="Empaque" /> Empaque</label>
-      <label><input type="checkbox" value="Electrónica" /> Electrónica</label>
-      <label><input type="checkbox" value="Logística" /> Logística</label>
-      <label><input type="checkbox" value="Equipo de protección" /> Equipo de protección</label>
+    <label>Requerimientos:</label>
+    <div class="checkboxes" id="requerimientos">
+      <label><input type="checkbox" value="PLASTICS">PLASTICS</label>
+      <label><input type="checkbox" value="METAL MECHANICS">METAL MECHANICS</label>
+      <label><input type="checkbox" value="ELECTRONICS">ELECTRONICS</label>
+      <label><input type="checkbox" value="PACKAGING">PACKAGING</label>
+      <label><input type="checkbox" value="COMMUNICATION AND INFORMATION TECHNOLOGIES">COMMUNICATION AND INFORMATION TECHNOLOGIES</label>
+      <label><input type="checkbox" value="TEXTILE">TEXTILE</label>
+      <label><input type="checkbox" value="SPECIALIZED SERVICES">SPECIALIZED SERVICES</label>
+      <label><input type="checkbox" value="MROS">MROS</label>
     </div>
 
-    <button onclick="enviarDatos()">Actualizar</button>
-    <p id="mensaje"></p>
+    <button onclick="enviar()">Actualizar</button>
+    <div id="mensaje"></div>
   </div>
 
-  <script src="script.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
