@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Actualizar disponibilidad</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="modal" id="modalNombre">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="card" style="display:none;" id="formularioCard">
+  <div class="card" id="formularioCard">
     <h2>Actualizar tu disponibilidad</h2>
 
     <label for="disponibilidad">Disponibilidad:</label>
@@ -25,7 +25,7 @@
       <option value="Receso">Receso</option>
     </select>
 
-    <label>Requerimientos:</label>
+    <label for="requerimientos">Requerimientos:</label>
     <div class="checkboxes" id="requerimientos">
       <label><input type="checkbox" value="PLASTICS">PLASTICS</label>
       <label><input type="checkbox" value="METAL MECHANICS">METAL MECHANICS</label>
@@ -41,6 +41,6 @@
     <div id="mensaje"></div>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
