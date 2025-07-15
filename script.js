@@ -22,8 +22,9 @@ function confirmarNombre() {
 document.getElementById("btnActualizar").addEventListener("click", async () => {
   const disponibilidad = document.getElementById("disponibilidad").value;
 
-  const requerimientos = Array.from(document.querySelectorAll(".checkbox-group input[type=checkbox]:checked"))
-    .map(input => input.value);
+  const requerimientos = Array.from(
+    document.querySelectorAll(".checkbox-group input[type=checkbox]:checked")
+  ).map(input => input.value);
 
   if (!nombreGlobal) {
     alert("Nombre no definido. Vuelve a ingresar.");
@@ -31,19 +32,19 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
   }
 
   try {
-    const res = await fetch(`${API_URL}/rest/v1/Estado?Compradores=eq.${encodeURIComponent(nombreGlobal)}`, {
+    const res = await fetch(`${API_URL}/rest/v1/Estado`, {
       method: "PATCH",
       headers: {
         apikey: API_KEY,
         Authorization: `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
         Prefer: "return=representation",
-        // ✅ Header personalizado para RLS
-        "request.headers.comprador": nombreGlobal
+        "x-client-info": "valion-frontend",
+        "comprador": nombreGlobal // clave para el RLS
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
-        Requerimientos: requerimientos.join(", ")
+        Requerimientos: requerimientos // ✅ se envía como arreglo, no string
       })
     });
 
