@@ -3,15 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Actualizar disponibilidad</title>
+  <title>Actualizar disponibilidad B2B</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="form-container">
-    <h2>Actualizar tu disponibilidad</h2>
-
+  <div class="identidad-modulo" id="moduloIdentidad">
+    <h2>Bienvenido</h2>
     <label for="nombreComprador">Nombre del comprador:</label>
     <input type="text" id="nombreComprador" placeholder="Ej. ACPS" required />
+    <button onclick="confirmarNombre()">Continuar</button>
+  </div>
+
+  <div class="form-container oculto" id="formularioModulo">
+    <h2>Actualizar tu disponibilidad</h2>
+
+    <p><strong>Comprador:</strong> <span id="nombreMostrado"></span></p>
 
     <label for="disponibilidad">Disponibilidad:</label>
     <select id="disponibilidad">
@@ -33,7 +39,6 @@
     </div>
 
     <button id="btnActualizar">Actualizar</button>
-
     <div id="mensajeConfirmacion"></div>
   </div>
 
