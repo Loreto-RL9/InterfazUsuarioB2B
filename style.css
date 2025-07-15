@@ -1,8 +1,7 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: 
-    linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
-    url('https://drive.google.com/uc?export=view&id=1yWdY-cv_8akWfHa6F2TiPbH8mZTFeFVl');
+  background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+              url('https://drive.google.com/uc?export=view&id=1yWdY-cv_8akWfHa6F2TiPbH8mZTFeFVl');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -20,6 +19,7 @@ body {
   max-width: 420px;
   width: 100%;
   animation: fadeIn 0.5s ease-in-out;
+  display: none;
 }
 
 h2 {
@@ -119,18 +119,6 @@ button:hover {
   font-size: 1rem;
   border-radius: 6px;
   border: 1px solid #ccc;
-}
-
-.modal button {
-  margin-top: 1rem;
-  background-color: #0057d8;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
 }
 
 @keyframes fadeIn {
