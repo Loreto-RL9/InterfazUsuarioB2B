@@ -1,127 +1,71 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
-              url('https://drive.google.com/uc?export=view&id=1yWdY-cv_8akWfHa6F2TiPbH8mZTFeFVl');
-  background-size: cover;
-  background-position: center;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 
-.card {
-  background: white;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  max-width: 420px;
-  width: 100%;
-  animation: fadeIn 0.5s ease-in-out;
-  display: none;
-}
-
-h2 {
-  color: #003366;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-label {
-  font-weight: 600;
-  margin-top: 1rem;
-  display: block;
-}
-
-select, .checkboxes {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-.checkboxes {
-  padding: 0;
-  border: none;
-}
-
-.checkboxes label {
-  display: inline-block;
-  background-color: #eef1f5;
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin: 6px 6px 0 0;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.checkboxes label:hover {
-  background-color: #dce2eb;
-}
-
-.checkboxes input {
-  margin-right: 6px;
-}
-
-button {
-  margin-top: 1rem;
-  width: 100%;
-  padding: 12px;
-  background-color: #0057d8;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #003eaa;
-}
-
-#mensaje {
-  text-align: center;
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #fff;
-  padding: 2rem;
+.form-container {
+  background-color: #fff;
+  padding: 30px;
   border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 400px;
 }
 
-.modal input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 1rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #003366;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+select,
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.checkbox-group label {
+  background-color: #e8f0fe;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0056d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#mensajeConfirmacion {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
 }
