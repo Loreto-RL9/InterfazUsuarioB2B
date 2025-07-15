@@ -1,5 +1,5 @@
 const API_URL = "https://qqegzhoxhzsgcqiulqul.supabase.co";
-const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxZWd6aG94aHpzZ2NxaXVscXVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI1MzA0ODUsImV4cCI6MjA2ODEwNjQ4NX0.iAFhr3QoYJDkP1_iXGSsDZAd_f00RxuFK0HCdvo7ryE"; // ⚠️ Oculta en producción
+const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ..."; // truncado
 
 let nombreGlobal = "";
 
@@ -20,19 +20,15 @@ function confirmarNombre() {
 
 document.getElementById("btnActualizar").addEventListener("click", async () => {
   const disponibilidad = document.getElementById("disponibilidad").value;
-
-  const requerimientos = Array.from(
-    document.querySelectorAll(".checkbox-group input[type=checkbox]:checked")
-  ).map(input => input.value);
+  const requerimientos = Array.from(document.querySelectorAll(".checkbox-group input[type=checkbox]:checked"))
+    .map(input => input.value);
 
   if (!nombreGlobal) {
     alert("Nombre no definido. Vuelve a ingresar.");
     return;
   }
 
-  console.log("Nombre:", nombreGlobal);
-  console.log("Disponibilidad:", disponibilidad);
-  console.log("Requerimientos:", requerimientos);
+  const mensaje = document.getElementById("mensajeConfirmacion");
 
   try {
     const res = await fetch(`${API_URL}/rest/v1/Estado?Compradores=eq.${encodeURIComponent(nombreGlobal)}`, {
@@ -41,31 +37,33 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
         apikey: API_KEY,
         Authorization: `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
-        Prefer: "return=representation"
+        Prefer: "return=representation",
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
-        Requerimientos: requerimientos  // Se manda como array real
+        Requerimientos: requerimientos // Se envía como ARRAY
       })
     });
 
-    const mensaje = document.getElementById("mensajeConfirmacion");
+    const resultado = await res.json();
 
     if (res.ok) {
+      console.log("Actualización exitosa:", resultado);
       mensaje.innerText = "Actualizado correctamente.";
       mensaje.style.color = "green";
     } else {
-      const errorData = await res.json();
-      console.error("Error al actualizar:", errorData);
+      console.error("Error en Supabase:", resultado);
       mensaje.innerText = "Error al actualizar. Verifica el nombre.";
       mensaje.style.color = "red";
     }
 
-    setTimeout(() => {
-      mensaje.innerText = "";
-    }, 5000);
   } catch (error) {
     console.error("Error de red:", error);
-    document.getElementById("mensajeConfirmacion").innerText = "Error de red.";
+    mensaje.innerText = "Error de red.";
+    mensaje.style.color = "red";
   }
+
+  setTimeout(() => {
+    mensaje.innerText = "";
+  }, 5000);
 });
