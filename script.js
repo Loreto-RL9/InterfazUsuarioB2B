@@ -38,7 +38,7 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
         Authorization: `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
         Prefer: "return=representation",
-        comprador: nombreGlobal  // 👈 ¡Este es esencial para la política RLS!
+        comprador: nombreGlobal  // ✅ ESTE ES EL QUE FALTABA EN TU FETCH
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
