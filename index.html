@@ -2,21 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Actualizar disponibilidad</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="modal" id="modalNombre">
-    <div class="modal-content">
-      <h3>Ingresa tu nombre asignado</h3>
-      <input type="text" id="inputNombre" placeholder="Ejemplo: DIEHL">
-      <button onclick="guardarNombre()">Continuar</button>
-    </div>
-  </div>
-
-  <div class="card" id="formularioCard">
+  <div class="form-container">
     <h2>Actualizar tu disponibilidad</h2>
+
+    <label for="nombreComprador">Nombre del comprador:</label>
+    <input type="text" id="nombreComprador" placeholder="Ej. ACPS" required />
 
     <label for="disponibilidad">Disponibilidad:</label>
     <select id="disponibilidad">
@@ -25,20 +20,21 @@
       <option value="Receso">Receso</option>
     </select>
 
-    <label for="requerimientos">Requerimientos:</label>
-    <div class="checkboxes" id="requerimientos">
-      <label><input type="checkbox" value="PLASTICS">PLASTICS</label>
-      <label><input type="checkbox" value="METAL MECHANICS">METAL MECHANICS</label>
-      <label><input type="checkbox" value="ELECTRONICS">ELECTRONICS</label>
-      <label><input type="checkbox" value="PACKAGING">PACKAGING</label>
-      <label><input type="checkbox" value="COMMUNICATION AND INFORMATION TECHNOLOGIES">COMMUNICATION AND INFORMATION TECHNOLOGIES</label>
-      <label><input type="checkbox" value="TEXTILE">TEXTILE</label>
-      <label><input type="checkbox" value="SPECIALIZED SERVICES">SPECIALIZED SERVICES</label>
-      <label><input type="checkbox" value="MROS">MROS</label>
+    <label>Requerimientos:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" value="PLASTICS" /> PLASTICS</label>
+      <label><input type="checkbox" value="METAL MECHANICS" /> METAL MECHANICS</label>
+      <label><input type="checkbox" value="ELECTRONICS" /> ELECTRONICS</label>
+      <label><input type="checkbox" value="PACKAGING" /> PACKAGING</label>
+      <label><input type="checkbox" value="COMMUNICATION AND INFORMATION TECHNOLOGIES" /> COMMUNICATION AND INFORMATION TECHNOLOGIES</label>
+      <label><input type="checkbox" value="TEXTILE" /> TEXTILE</label>
+      <label><input type="checkbox" value="SPECIALIZED SERVICES" /> SPECIALIZED SERVICES</label>
+      <label><input type="checkbox" value="MROS" /> MROS</label>
     </div>
 
-    <button onclick="enviar()">Actualizar</button>
-    <div id="mensaje"></div>
+    <button id="btnActualizar">Actualizar</button>
+
+    <div id="mensajeConfirmacion"></div>
   </div>
 
   <script src="script.js"></script>
