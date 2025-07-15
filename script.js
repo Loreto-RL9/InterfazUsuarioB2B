@@ -1,5 +1,5 @@
 const API_URL = "https://qqegzhoxhzsgcqiulqul.supabase.co";
-const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxZWd6aG94aHpzZ2NxaXVscXVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI1MzA0ODUsImV4cCI6MjA2ODEwNjQ4NX0.iAFhr3QoYJDkP1_iXGSsDZAd_f00RxuFK0HCdvo7ryE";
+const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."; // ⚠️ Oculta en producción
 
 let nombreGlobal = "";
 
@@ -20,8 +20,10 @@ function confirmarNombre() {
 
 document.getElementById("btnActualizar").addEventListener("click", async () => {
   const disponibilidad = document.getElementById("disponibilidad").value;
-  const requerimientos = Array.from(document.querySelectorAll(".checkbox-group input[type=checkbox]:checked"))
-    .map(input => input.value);
+
+  const requerimientos = Array.from(
+    document.querySelectorAll(".checkbox-group input[type=checkbox]:checked")
+  ).map(input => input.value);
 
   if (!nombreGlobal) {
     alert("Nombre no definido. Vuelve a ingresar.");
@@ -43,22 +45,19 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
       },
       body: JSON.stringify({
         Disponibilidad: disponibilidad,
-        Requerimientos: requerimientos // usa array directamente si el campo es tipo array
+        Requerimientos: requerimientos  // Se manda como array real
       })
     });
 
     const mensaje = document.getElementById("mensajeConfirmacion");
-    const data = await res.json();
-    console.log("Respuesta Supabase:", data);
 
-    if (res.ok && data.length > 0) {
-      mensaje.innerText = "✅ Actualizado correctamente.";
+    if (res.ok) {
+      mensaje.innerText = "Actualizado correctamente.";
       mensaje.style.color = "green";
-    } else if (res.ok && data.length === 0) {
-      mensaje.innerText = "⚠️ Nombre no encontrado en la base.";
-      mensaje.style.color = "orange";
     } else {
-      mensaje.innerText = "❌ Error al actualizar. Revisa consola.";
+      const errorData = await res.json();
+      console.error("Error al actualizar:", errorData);
+      mensaje.innerText = "Error al actualizar. Verifica el nombre.";
       mensaje.style.color = "red";
     }
 
@@ -66,7 +65,7 @@ document.getElementById("btnActualizar").addEventListener("click", async () => {
       mensaje.innerText = "";
     }, 5000);
   } catch (error) {
-    console.error("❌ Error de red:", error);
+    console.error("Error de red:", error);
     document.getElementById("mensajeConfirmacion").innerText = "Error de red.";
   }
 });
